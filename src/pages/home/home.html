@@ -5,27 +5,50 @@
   </ion-header>
   
   <ion-content>
+        
     <ion-card>
       <ion-card-content>
         <ion-card-header text-center style="background-color: rgb(179, 240, 176)">
           O que você é?
-        </ion-card-header>
-          <ion-list no-border>
-            <button ion-item (click)="seleciona(1)">
-              <ion-icon name='bus' item-start></ion-icon>
-              Motorista
-            </button>
-        
-            <button ion-item (click)="seleciona(2)">
-              <ion-icon name='people' item-start></ion-icon>
-              Passageiro
-            </button>
-        
-            <button ion-item (click)="seleciona(3)">
-              <ion-icon name='person' item-start></ion-icon>
-              Responsável
-            </button>
-          </ion-list>
+        </ion-card-header>     
+
+        <ion-grid>
+            <ion-row>
+                <ion-col col-12>
+                    <button ion-item text-center (click)="seleciona(1)">
+                        Motorista
+                     
+                      <ion-row justify-content-center no-padding>
+                          <ion-thumbnail >
+                              <img text-center style="width: 100px; height: 100px;" src="http://icons.iconarchive.com/icons/webalys/kameleon.pics/512/Bus-icon.png">
+                            </ion-thumbnail>
+                      </ion-row>
+                    </button>
+                  </ion-col>
+                  <ion-col  col-6>
+                      <button ion-item text-center (click)="seleciona(1)">
+                          Passageiro
+                        
+                      <ion-row justify-content-center no-padding>
+                          <ion-thumbnail >
+                              <img text-center style="width: 100px; height: 100px;" src="https://image.flaticon.com/icons/png/512/201/201818.png">
+                            </ion-thumbnail>
+                      </ion-row>
+                    </button>
+                  </ion-col>   
+                  <ion-col  col-6>
+                      <button ion-item text-center (click)="seleciona(1)">
+                          Responsável
+                        
+                        <ion-row justify-content-center no-padding>
+                            <ion-thumbnail >
+                                <img text-center style="width: 100px; height: 100px;" src="https://icon-icons.com/icons2/564/PNG/512/Family_icon-icons.com_54182.png">
+                              </ion-thumbnail>
+                        </ion-row>
+                      </button>
+                    </ion-col>                                 
+              </ion-row>
+          </ion-grid>
       </ion-card-content>
     </ion-card>
     
