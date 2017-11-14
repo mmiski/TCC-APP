@@ -1,14 +1,32 @@
 <ion-header>
-  <ion-navbar>
-    <ion-title>
-      Ionic Blank
-    </ion-title>
-  </ion-navbar>
-</ion-header>
-
-<ion-content padding>
-  The world is your oyster.
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will be your guide.
-  </p>
-</ion-content>
+    <ion-navbar color="primary">
+      <ion-title text-center >VANNZ</ion-title>
+    </ion-navbar>
+  </ion-header>
+  
+  <ion-content>
+    <ion-card>
+      <ion-card-content>
+        <ion-card-header text-center style="background-color: rgb(179, 240, 176)">
+          O que você é?
+        </ion-card-header>
+          <ion-list no-border>
+            <button ion-item (click)="seleciona(1)">
+              <ion-icon name='bus' item-start></ion-icon>
+              Motorista
+            </button>
+        
+            <button ion-item (click)="seleciona(2)">
+              <ion-icon name='people' item-start></ion-icon>
+              Passageiro
+            </button>
+        
+            <button ion-item (click)="seleciona(3)">
+              <ion-icon name='person' item-start></ion-icon>
+              Responsável
+            </button>
+          </ion-list>
+      </ion-card-content>
+    </ion-card>
+    
+  </ion-content>

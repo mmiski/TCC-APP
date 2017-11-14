@@ -1,0 +1,35 @@
+
+<ion-header>
+      <ion-navbar color="primary">
+          <ion-title >Checkin</ion-title>
+        </ion-navbar>
+  </ion-header>
+
+<ion-content padding-vertical>
+  <ion-card >
+    <ion-card-content >
+      <ion-card-header text-center>
+        Chave de Acesso
+      </ion-card-header>
+      <ion-input type="text" text-center style="border: 1px solid black" [(ngModel)]="chave"></ion-input>
+    </ion-card-content>
+  </ion-card>
+  <ion-card >
+      <ion-card-content >
+          <ion-item>
+              <ion-label>Outras chaves usadas</ion-label>
+              <ion-select [(ngModel)]="chave" interface="action-sheet">
+                <ion-option value="19bf95fd-df9d-4b0a-8b29-b3955c13a091">Antônio Giolark</ion-option>
+                <ion-option value="54a9d333-c545-49d3-a447-dbe5e2e3662c">Amadeus Sefazan</ion-option>
+              </ion-select>
+            </ion-item>
+
+      </ion-card-content>
+    </ion-card>
+  <button ion-button full icon-right>Ler Código
+      <ion-icon name="camera"></ion-icon>
+  </button>
+  <button ion-button full icon-right (click)="presentLoading()">Fazer Checkin
+      <ion-icon name="key"></ion-icon>
+  </button>
+</ion-content>
