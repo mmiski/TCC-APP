@@ -27,7 +27,7 @@ export class LoginPage {
       });
       loader.present();
       this.navCtrl.setRoot(this.tipoUsuario == 1 ? HomeMotoristaPage : HomePassageiroResponsavelPage);
-     }, 4000)
+     }, 2000)
   }
 
   
