@@ -11,6 +11,10 @@ import { CheckinPage } from '../pages/checkin/checkin';
 import { TipoUsuarioPage } from '../pages/tipo-usuario/tipo-usuario';
 import { HomeMotoristaPage } from '../pages/home-motorista/home-motorista';
 import { HomePassageiroResponsavelPage } from '../pages/home-passageiro-responsavel/home-passageiro-responsavel';
+import { PerfilPage } from '../pages/perfil/perfil';
+import { DocumentosPage } from '../pages/documentos/documentos';
+import { RotasPage } from '../pages/rotas/rotas';
+import { DiarioPage } from '../pages/diario/diario';
 
 @NgModule({
   declarations: [
@@ -20,7 +24,11 @@ import { HomePassageiroResponsavelPage } from '../pages/home-passageiro-responsa
     CheckinPage,
     TipoUsuarioPage,
     HomeMotoristaPage,
-    HomePassageiroResponsavelPage
+    HomePassageiroResponsavelPage,
+    PerfilPage,
+    DocumentosPage,
+    RotasPage,
+    DiarioPage
   ],
   imports: [
     BrowserModule,
@@ -34,7 +42,11 @@ import { HomePassageiroResponsavelPage } from '../pages/home-passageiro-responsa
     CheckinPage,
     TipoUsuarioPage,
     HomeMotoristaPage,
-    HomePassageiroResponsavelPage
+    HomePassageiroResponsavelPage,
+    PerfilPage,
+    DocumentosPage,
+    RotasPage,
+    DiarioPage
   ],
   providers: [
     StatusBar,
