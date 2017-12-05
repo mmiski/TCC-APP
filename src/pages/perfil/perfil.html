@@ -6,8 +6,27 @@
   </ion-navbar>
 
 </ion-header>
-
+<ion-card>
+  
+      <ion-item>
+          <ion-avatar item-left *ngIf="url">
+            <img [src]="url">
+          </ion-avatar>
+          {{ usuario.nome }}
+      </ion-item>
+      <ion-item>
+        <p>{{ usuario.cpf }}</p>
+      </ion-item>
+      <ion-item>
+        <p>{{ usuario.dataNascimento }}</p>
+      </ion-item>
+      <ion-item>
+        <p>{{ usuario.email }}</p>
+      </ion-item>
+      <ion-item>
+        <p>{{ usuario.telefone }}</p>
+      </ion-item>
+    </ion-card>
 
 <ion-content padding>
-
 </ion-content>

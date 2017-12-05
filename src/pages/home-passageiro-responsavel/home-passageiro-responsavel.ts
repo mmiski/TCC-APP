@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
 import { PerfilPage } from '../perfil/perfil';
 import { DiarioPage } from '../diario/diario';
 import { RotasPage } from '../rotas/rotas';
@@ -22,9 +22,11 @@ export class HomePassageiroResponsavelPage {
   tab2 = DiarioPage;
   tab3 = DocumentosPage;
   tab4 = PerfilPage;
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
 
+  usuario: any;
 
+  constructor(public navCtrl: NavController, public navParams: NavParams,public loadingCtrl: LoadingController) {
+    this.usuario = this.navParams.get('usuario');
   }
 
   ionViewDidLoad() {
