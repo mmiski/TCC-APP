@@ -4,61 +4,40 @@ import { LoginPage } from '../login/login';
 import { AngularFireDatabase,  FirebaseListObservable  } from 'angularFire2/database';
 import * as firebase from 'firebase/app';
 import { AcessoMobile } from '../classes/AcessoMobile';
+import { CheckInService } from '../services/checkin.service';
 @IonicPage()
 @Component({
   selector: 'page-checkin',
   templateUrl: 'checkin.html',
 })
 export class CheckinPage {
-  chave: string = "";
-  tipoUsuario: number;
-  constructor(public navCtrl: NavController, public navParams: NavParams, public loadingCtrl: LoadingController, public afDataBase: AngularFireDatabase, private _alertCtrl: AlertController) {
+  codigo: string = "";
+  tipoUsuario: string;
+  constructor(public navCtrl: NavController, public navParams: NavParams, public loadingCtrl: LoadingController, 
+              private _alertCtrl: AlertController, public _serviceCheckin: CheckInService) {
     this.tipoUsuario = this.navParams.get('tipoUsuario');
   }
 
-  presentLoading() {
+  acessar() {
     let loader = this.loadingCtrl.create({
       content: "Validando...",
     });
     loader.present();
 
-    this.afDataBase.list(`/AcessosMobile/`,{
-      query: {
-      orderByChild: 'codigo',
-      equalTo: this.chave
-      }
-      }).subscribe(dados => {
+    this._serviceCheckin.verificaCodigo(this.codigo, this.tipoUsuario).then((acessoDados: AcessoMobile) => {
         debugger;
-        if (dados.length == 0) {
-          loader.dismiss();
-          this._alertCtrl.create({
-            title: 'Atenção',
-            subTitle: 'Chave incorreta!',
-            buttons: [{ text: 'Ok'}]
-          }).present();
-          
-        }else{
-          dados.forEach(element => {
-            if (element.tipoUsuario != this.tipoUsuario) {
-              debugger;
-              loader.dismiss();
-              this._alertCtrl.create({
-                title: 'Atenção',
-                subTitle: 'Chave incorreta!',
-                buttons: [{ text: 'Ok'}]
-              }).present();
-            }else{
-              loader.dismiss();
-              let acessoMobile = new AcessoMobile();
-              acessoMobile.clienteKey = element.clienteKey;
-              acessoMobile.codigo = this.chave;
-              acessoMobile.tipoUsuario = element.tipoUsuario;
-              acessoMobile.usuarioKey = element.usuarioKey;
+        loader.dismiss();
 
-              this.navCtrl.setRoot(LoginPage, {tipoUsuario: this.tipoUsuario, acesso: acessoMobile});
-            }
-          });
-        }
+        this.navCtrl.setRoot(LoginPage, {tipoUsuario: this.tipoUsuario, acesso: acessoDados});
+      }).catch(err => {
+
+        loader.dismiss();
+
+        this._alertCtrl.create({       
+          title: 'Atenção',
+          subTitle: err,
+          buttons: [{ text: 'Entendi'}]
+        }).present();
       });   
   }
 

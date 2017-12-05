@@ -35,6 +35,7 @@ import { UsuarioMensagemService } from '../pages/services/usuario-mensagem.servi
 import { MotoristaService } from '../pages/services/motorista.service';
 import { PassageiroService } from '../pages/services/passageiro.service';
 import { ResponsavelService } from '../pages/services/responsavel.service';
+import { CheckInService } from '../pages/services/checkin.service';
 
 
 
@@ -86,7 +87,7 @@ const  config = {
   ],
   providers: [AngularFireDatabase, AuthService, UsuarioService, ClienteService, ContatoService, UsuarioMensagemService,
     AreaAtuacaoService, ModeloContratoService, PlanoMensalidadeService, VeiculoService, MotoristaService, PassageiroService, ResponsavelService, 
-    PassageiroContratoService, PassageiroMensalidadeService, AcessoMobileService, RotaService,
+    PassageiroContratoService, PassageiroMensalidadeService, AcessoMobileService, RotaService, CheckInService,
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
