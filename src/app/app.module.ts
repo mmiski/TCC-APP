@@ -36,6 +36,9 @@ import { MotoristaService } from '../pages/services/motorista.service';
 import { PassageiroService } from '../pages/services/passageiro.service';
 import { ResponsavelService } from '../pages/services/responsavel.service';
 import { CheckInService } from '../pages/services/checkin.service';
+import { QRScanner } from '@ionic-native/qr-scanner';
+import { PagesProvidersDatabaseProvider } from '../providers/pages-providers-database/pages-providers-database';
+import { SQLite } from '@ionic-native/sqlite';
 
 
 
@@ -90,7 +93,10 @@ const  config = {
     PassageiroContratoService, PassageiroMensalidadeService, AcessoMobileService, RotaService, CheckInService,
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    QRScanner,
+    SQLite,
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    PagesProvidersDatabaseProvider
   ]
 })
 export class AppModule {}

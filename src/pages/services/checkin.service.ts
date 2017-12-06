@@ -15,6 +15,8 @@ export class CheckInService{
     }
 
 
+    
+
     verificaCodigo(guid: string = "", tipo: string = ""){
         return new Promise((resolve, reject) => {
             this.afDataBase.list(`/AcessosMobile/`, {
