@@ -28,10 +28,10 @@ import { MotoristaService } from '../pages/services/motorista.service';
 import { PassageiroService } from '../pages/services/passageiro.service';
 import { CheckInService } from '../pages/services/checkin.service';
 import { QRScanner } from '@ionic-native/qr-scanner';
-import { PagesProvidersDatabaseProvider } from '../providers/pages-providers-database/pages-providers-database';
 import { SQLite } from '@ionic-native/sqlite';
 import { UsuarioService } from '../pages/services/usuario.service';
 import { SelecionaVeiculoPage } from '../pages/seleciona-veiculo/seleciona-veiculo';
+import { NativeStorage } from '@ionic-native/native-storage';
 
 
 
@@ -90,8 +90,8 @@ const  config = {
     SplashScreen,
     QRScanner,
     SQLite,
-    {provide: ErrorHandler, useClass: IonicErrorHandler},
-    PagesProvidersDatabaseProvider
+    NativeStorage,
+    {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })
 export class AppModule {}

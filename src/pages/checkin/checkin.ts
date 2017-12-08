@@ -5,7 +5,6 @@ import { CheckInService } from '../services/checkin.service';
 import { QRScanner, QRScannerStatus } from '@ionic-native/qr-scanner';
 import { PassageiroService } from '../services/passageiro.service';
 import { MotoristaService } from '../services/motorista.service';
-import { PagesProvidersDatabaseProvider } from '../../providers/pages-providers-database/pages-providers-database';
 import { LoginPage } from '../login/login';
 import { SelecionaVeiculoPage } from '../seleciona-veiculo/seleciona-veiculo';
 import { UsuarioService } from '../services/usuario.service';
@@ -18,18 +17,13 @@ import { UsuarioService } from '../services/usuario.service';
 export class CheckinPage {
   codigo: string = "";
   tipoUsuario: string;
-  listaAcessos: Array<any>;
   constructor(public navCtrl: NavController, public navParams: NavParams, public loadingCtrl: LoadingController, 
               private _alertCtrl: AlertController, public _serviceCheckin: CheckInService, public qrScanner: QRScanner,
-              public _servicePassageiro: PassageiroService, public _serviceMotorista: MotoristaService,
-              public _serviceDatabase: PagesProvidersDatabaseProvider, public platform: Platform, public _serviceUsuario: UsuarioService) {
+              public _servicePassageiro: PassageiroService, public _serviceMotorista: MotoristaService, public platform: Platform, public _serviceUsuario: UsuarioService) {
     this.tipoUsuario = this.navParams.get('tipoUsuario');
-    this.listaAcessos = new Array();
 
     if (this.platform.is('cordova')) {
-      this._serviceDatabase.listaAcessosAnteriores(this.tipoUsuario).then((dados: any[]) => {
-        this.listaAcessos = dados;
-      });
+      
     }
    
   }
@@ -134,12 +128,6 @@ export class CheckinPage {
             });      
           });       
       }
-
-      this._serviceDatabase.insert(nome, cpf, this.tipoUsuario, acessoDados.codigo).then(() =>{
-        resolve();
-      }).catch(() => {
-        reject();
-      });
             
     });
   }

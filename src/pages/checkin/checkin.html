@@ -21,9 +21,9 @@
     <ion-input type="text" text-center style="border: 1px solid black" [(ngModel)]="codigo"></ion-input>
     <ion-item padding>
         <ion-label>Outras chaves usadas</ion-label>
-        <ion-select [(ngModel)]="codigo" interface="action-sheet">
-          <ion-option  *ngFor="let item of listaAcessos" value="item.codigo">{{item.nome}} -- {{item.cpf}}</ion-option>
-        </ion-select>
+        <button ion-item no-lines text-center  (click)="acessar()">
+         {{ultimoCodigo}}
+        </button>
       </ion-item>
   </ion-card-content>
 </ion-card>
