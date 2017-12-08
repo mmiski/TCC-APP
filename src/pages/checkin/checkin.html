@@ -1,6 +1,6 @@
 
 <ion-header>
-    <ion-navbar color="secondary">
+    <ion-navbar color="verdinho">
         <ion-title >Checkin</ion-title>
       </ion-navbar>
 </ion-header>
@@ -13,22 +13,21 @@
           <ion-card-header text-center>
               Chave de Acesso
             </ion-card-header>
-          <button ion-button color="secondary" clear item-right>
+          <button ion-button color="secondary" clear item-right (click)="lerQrcode()">
               <ion-icon ios="ios-camera" md="md-camera"></ion-icon>
           </button>
       </ion-item>
     
-    <ion-input type="text" text-center style="border: 1px solid black" [(ngModel)]="chave"></ion-input>
+    <ion-input type="text" text-center style="border: 1px solid black" [(ngModel)]="codigo"></ion-input>
     <ion-item padding>
         <ion-label>Outras chaves usadas</ion-label>
-        <ion-select [(ngModel)]="chave" interface="action-sheet">
-          <ion-option value="19bf95fd-df9d-4b0a-8b29-b3955c13a091">Antônio Giolark</ion-option>
-          <ion-option value="54a9d333-c545-49d3-a447-dbe5e2e3662c">Amadeus Sefazan</ion-option>
+        <ion-select [(ngModel)]="codigo" interface="action-sheet">
+          <ion-option  *ngFor="let item of listaAcessos" value="item.codigo">{{item.nome}} -- {{item.cpf}}</ion-option>
         </ion-select>
       </ion-item>
   </ion-card-content>
 </ion-card>
-<button ion-button full color="secondary" icon-right (click)="presentLoading()">Fazer Checkin
+<button ion-button full color="verdinho" icon-right (click)="acessar()">Fazer Checkin
     <ion-icon name="key"></ion-icon>
 </button>
 </ion-content>

@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase, FirebaseListObservable } from 'angularFire2/database';
 import { Usuario } from '../classes/Usuario';
-import { Posicao } from '../classes/Posicao';
-import { forEach } from '@angular/router/src/utils/collection';
 import { RotaPassageiro } from '../classes/RotaPassageiro';
 
 @Injectable()
@@ -44,7 +42,6 @@ export class RotaPassageiroService {
 
   isDuplicado(valor: string = ""){
     return new Promise((resolve, reject) => {
-      let flag = false;
 
       this.afDataBase.list(`/Clientes/${this.clienteKey}/Rotas/${this.rotaKey}/Passageiros`).subscribe((dados) => {
         dados.forEach(element => {

@@ -1,84 +1,101 @@
-import { Injectable } from "@angular/core";
-import { Usuario } from '../classes/Usuario';
-import { AngularFireDatabase, FirebaseListObservable } from "angularFire2/database";
-import { AngularFireAuth } from "angularfire2/auth";
-import { AuthService } from "./auth.service";
-
-
+import { Injectable } from '@angular/core';
+import { AngularFireDatabase} from 'angularFire2/database';
+import { UsuarioApp } from '../classes/UsuarioApp';
+import { Cliente } from '../classes/Cliente';
+import { AcessoMobile } from '../classes/AcessoMobile';
+import { Veiculo } from '../classes/Veiculo';
+import { PassageiroService } from './passageiro.service';
+import { MotoristaService } from './motorista.service';
+import { ClienteService } from './cliente.service';
 
 @Injectable()
-export class UsuarioService{
+export class UsuarioService {
 
-    usuario: Usuario;
-    key = "";
-    clienteKey = "";
+  usuario: UsuarioApp;
+  cliente: Cliente;
+  acesso: AcessoMobile;
+  van: Veiculo;
 
-    constructor(public afAuth: AngularFireAuth, public afDataBase: AngularFireDatabase, public _serviceAuth : AuthService){
 
-    }
+  constructor(public afDataBase: AngularFireDatabase, public _servicePassageiro: PassageiroService, public _serviceMotorista: MotoristaService,
+              public _serviceCliente: ClienteService) { 
+    this.usuario = new UsuarioApp();
+    this.cliente = new Cliente();
+    this.acesso = new AcessoMobile();
+    this.van = new Veiculo();  
 
-    getDados(key: string){
-        return this.afDataBase.list(`/Usuarios/${key}`);
-    }
+  }
 
-    lista(): FirebaseListObservable<any>{
-        
-            return this.afDataBase.list(`/Usuarios`,{
-              query: {
-              orderByChild: 'nome'
-              },
+  instanciaCliente(){
+    this._serviceCliente.lstClienteDataBase(this.acesso.clienteKey).subscribe((dados) => {
+        dados.forEach(element => {
+            if (element.$key == 'cnpjCpf') {
+                this.cliente.cnpjCpf = element.$value; 
+            }
+            else if (element.$key == 'email') {
+                this.cliente.email = element.$value; 
+            }
+            else if (element.$key == 'razaoSocial') {
+                this.cliente.razaoSocial = element.$value; 
+            }
+            else if (element.$key == 'nome') {
+                this.cliente.nome = element.$value; 
+            }
+            else if (element.$key == 'nomeFantasia') {
+                this.cliente.nomeFantasia = element.$value; 
+            }
+            else if (element.$key == 'telefone') {
+                this.cliente.telefone = element.$value; 
+            }
+        });  
+    });
+  }
+
+  instanciaUsuario(){
+    return new Promise((resolve, reject) => {
+        if (this.acesso.tipoUsuario == 0) {
+            this._servicePassageiro.key = this.acesso.clienteKey;
+          this._servicePassageiro.getDados(this.acesso.usuarioKey).subscribe(dados => {
+              dados.forEach(pass => {
+                  debugger;
+                if (pass.$key == 'cpf') {
+                  this.usuario.cpf = pass.$value; 
+                }
+                else if (pass.$key == 'dataNascimento') {
+                  this.usuario.dataNascimento = pass.$value; 
+                }
+                else if (pass.$key == 'nome') {
+                  this.usuario.nome = pass.$value; 
+                }
+                else if (pass.$key == 'telefone') {
+                  this.usuario.telefone = pass.$value; 
+                }
               });
-      }
-    
-      alterar(usuario: Usuario){
-    
-            return this.lista().update(usuario.keyDuplicadoUsuario, usuario);
-      }
-    
-      novo(email: string, senha: string, nome: string){
-        return this.afAuth.auth.createUserWithEmailAndPassword(email, senha).then(dados => {
-            debugger;
-            let cadUsuario = new Usuario();
-            cadUsuario.email = email;
-            cadUsuario.uid = dados.uid;
-            cadUsuario.nome = nome;
-            cadUsuario.isAdm = false;
-            cadUsuario.bloqueado = false;
-            cadUsuario.imagemUsuario = 'http://icons.iconarchive.com/icons/double-j-design/origami-colored-pencil/256/blue-user-icon.png';    
-            cadUsuario.identificacaoCliente = this._serviceAuth.usuario.identificacaoCliente; 
-    
-            return this.lista().push(cadUsuario).then((dadosU) => {    
-                cadUsuario.keyDuplicadoUsuario = dadosU.key  
-                this.alterar(cadUsuario);
-            });
-        });
-      }
-      
-      deleta(key: string){
-        return this.lista().remove(key);
-      }
-    
-      bloquearDesbloquear( usuario: Usuario){
-        return this.lista().update(usuario.keyDuplicadoUsuario, usuario);
-      }
-
-      isDuplicado(valor: string = ""){
-        return new Promise((resolve, reject) => {
-          let flag = false;
-    
-          this.afDataBase.list(`/Usuarios`, {
-            query: {
-              orderByChild: 'email',
-              equalTo: valor
-            }
-          }).subscribe((dados) => {
-            debugger;
-            if (dados.length > 0) {
-              reject(new Error("Já existe um usuário cadastrado com o mesmo Email.")); 
-            }else{
               resolve();
-            }
-          });    
-        });
-      }
+            });
+        }else if (this.acesso.tipoUsuario == 1) {
+            this._serviceMotorista.key = this.acesso.clienteKey;
+          this._serviceMotorista.getDados(this.acesso.usuarioKey).subscribe(dados => {
+              dados.forEach(pass => {
+                if (pass.$key == 'cpf') {
+                  this.usuario.cpf = pass.$value; 
+                }
+                else if (pass.$key == 'dataNascimento') {
+                  this.usuario.dataNascimento = pass.$value; 
+                }
+                else if (pass.$key == 'nome') {
+                  this.usuario.nome = pass.$value; 
+                }
+                else if (pass.$key == 'telefone') {
+                  this.usuario.telefone = pass.$value; 
+                }
+              });
+              resolve();
+            });
+        }
+
+    });
+     
+  }
+
 }

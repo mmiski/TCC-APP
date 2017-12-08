@@ -28,6 +28,7 @@
     "@ionic/storage": "2.0.1",
     "angularfire2": "^5.0.0-rc.4",
     "cordova-plugin-qrscanner": "^2.5.0",
+    "cordova-plugin-x-toast": "^2.6.0",
     "cordova-sqlite-storage": "^2.1.2",
     "firebase": "^4.6.2",
     "ionic-angular": "3.8.0",
@@ -45,7 +46,8 @@
   "cordova": {
     "plugins": {
       "cordova-plugin-qrscanner": {},
-      "cordova-sqlite-storage": {}
+      "cordova-sqlite-storage": {},
+      "cordova-plugin-x-toast": {}
     }
   }
 }

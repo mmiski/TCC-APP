@@ -3,7 +3,6 @@ import { AngularFireDatabase, FirebaseListObservable } from 'angularFire2/databa
 import { Rota } from '../classes/Rota';
 import { Usuario } from '../classes/Usuario';
 import { Posicao } from '../classes/Posicao';
-import { forEach } from '@angular/router/src/utils/collection';
 
 @Injectable()
 export class RotaService {

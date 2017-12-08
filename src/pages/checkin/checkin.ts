@@ -1,15 +1,14 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, LoadingController, AlertController } from 'ionic-angular';
-import { LoginPage } from '../login/login';
-import { AngularFireDatabase,  FirebaseListObservable  } from 'angularFire2/database';
-import * as firebase from 'firebase/app';
+import { IonicPage, NavController, NavParams, LoadingController, AlertController, Platform } from 'ionic-angular';
 import { AcessoMobile } from '../classes/AcessoMobile';
 import { CheckInService } from '../services/checkin.service';
 import { QRScanner, QRScannerStatus } from '@ionic-native/qr-scanner';
 import { PassageiroService } from '../services/passageiro.service';
 import { MotoristaService } from '../services/motorista.service';
-import { ResponsavelService } from '../services/responsavel.service';
 import { PagesProvidersDatabaseProvider } from '../../providers/pages-providers-database/pages-providers-database';
+import { LoginPage } from '../login/login';
+import { SelecionaVeiculoPage } from '../seleciona-veiculo/seleciona-veiculo';
+import { UsuarioService } from '../services/usuario.service';
 
 @IonicPage()
 @Component({
@@ -19,11 +18,20 @@ import { PagesProvidersDatabaseProvider } from '../../providers/pages-providers-
 export class CheckinPage {
   codigo: string = "";
   tipoUsuario: string;
+  listaAcessos: Array<any>;
   constructor(public navCtrl: NavController, public navParams: NavParams, public loadingCtrl: LoadingController, 
               private _alertCtrl: AlertController, public _serviceCheckin: CheckInService, public qrScanner: QRScanner,
-              public _servicePassageiro: PassageiroService, public _serviceMotorista: MotoristaService,public _serviceResponsavel: ResponsavelService,
-              public _serviceDatabase: PagesProvidersDatabaseProvider) {
+              public _servicePassageiro: PassageiroService, public _serviceMotorista: MotoristaService,
+              public _serviceDatabase: PagesProvidersDatabaseProvider, public platform: Platform, public _serviceUsuario: UsuarioService) {
     this.tipoUsuario = this.navParams.get('tipoUsuario');
+    this.listaAcessos = new Array();
+
+    if (this.platform.is('cordova')) {
+      this._serviceDatabase.listaAcessosAnteriores(this.tipoUsuario).then((dados: any[]) => {
+        this.listaAcessos = dados;
+      });
+    }
+   
   }
 
   lerQrcode(){
@@ -54,14 +62,31 @@ export class CheckinPage {
     loader.present();
 
     this._serviceCheckin.verificaCodigo(this.codigo, this.tipoUsuario).then((acessoDados: AcessoMobile) => {
-        debugger;
-        
-        this.insertBaseDados(acessoDados).then(() => {
-          loader.dismiss();
-          this.navCtrl.setRoot(LoginPage, {tipoUsuario: this.tipoUsuario, acesso: acessoDados});
-        }).catch(() => {
-          loader.dismiss();
-        });
+  
+        this._serviceUsuario.acesso = acessoDados;
+        this._serviceUsuario.instanciaCliente();
+       
+        if (this.platform.is('cordova')) {
+          this.insertBaseDados(acessoDados).then(() => {
+            loader.dismiss();
+            if (this.tipoUsuario == '1') {
+              this.navCtrl.push(SelecionaVeiculoPage);
+            }else{
+            this.navCtrl.setRoot(LoginPage);
+            }
+          }).catch(() => {
+            loader.dismiss();
+          });
+        }else{
+          if (this.tipoUsuario == '1') {
+            loader.dismiss();
+            this.navCtrl.push(SelecionaVeiculoPage);
+          }else{
+            loader.dismiss();
+          this.navCtrl.setRoot(LoginPage);
+          }
+        }
+       
         
       }).catch(err => {
 
@@ -79,7 +104,6 @@ export class CheckinPage {
     return new Promise((resolve, reject) => {
       let nome: string;
       let cpf: string;
-
 
       if (this.tipoUsuario == '0') {
         this._servicePassageiro.key = acessoDados.clienteKey;
@@ -109,21 +133,7 @@ export class CheckinPage {
               }
             });      
           });       
-      }else if (this.tipoUsuario == '2'){
-        this._serviceResponsavel.key = acessoDados.clienteKey;
-  
-        this._serviceResponsavel.getDados(acessoDados.usuarioKey).subscribe(pass => {
-          pass.forEach(element => {
-            debugger;
-            if (element.$key == 'nome') {
-              nome = element.$value; 
-            }
-            if (element.$key == 'cpf') {
-              cpf = element.$value; 
-            }
-          });      
-        });       
-    }
+      }
 
       this._serviceDatabase.insert(nome, cpf, this.tipoUsuario, acessoDados.codigo).then(() =>{
         resolve();

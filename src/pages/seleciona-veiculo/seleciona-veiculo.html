@@ -1,0 +1,19 @@
+<ion-header>
+    <ion-navbar color="verdinho">
+        <ion-title >Selecione um Veículo</ion-title>
+      </ion-navbar>
+</ion-header>
+
+<ion-content>
+    <ion-list inset no-lines>
+        <button ion-item *ngFor="let item of listaVeiculos | async" (click)="direcionaLoginPage(item)">
+            <h2>Van: {{item.modelo}}</h2>
+            <h3>Placa: {{item.placa}}</h3>
+        </button> 
+      </ion-list>
+      <ion-card *ngIf="(listaVeiculos | async)?.length == 0">      
+            <ion-card-content>
+                Nenhum veículo cadastrado!
+            </ion-card-content>    
+      </ion-card>
+</ion-content>

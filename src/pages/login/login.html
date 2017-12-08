@@ -1,11 +1,17 @@
 <ion-content>
 <ion-grid style="height: 100%">
   <ion-row style="height: 100%;" justify-content-center align-items-center>
-      <h4>Olá</h4>
-      <ion-thumbnail padding>
-          <img text-center  src={{urlImagem}}>
-      </ion-thumbnail>
-      <h4>{{usuario.nome}}</h4>
+      <ion-row  justify-content-center>
+
+                    <h4 ion-col col-5 text-right align-self-center>Olá</h4>
+                    <ion-thumbnail ion-col col-7 padding align-self-center>
+                        <img src={{urlImagem}}>
+                    </ion-thumbnail>
+           
+            <h4 ion-col col-12 text-center>{{usuario.nome}}</h4>
+            <label *ngIf="acessoMobile.tipoUsuario == 1">Van: {{van.modelo}}, Placa: {{van.placa}}</label>
+      </ion-row>
+      
   </ion-row>
 </ion-grid>
 </ion-content>

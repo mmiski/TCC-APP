@@ -15,10 +15,11 @@ export class CheckInService{
     }
 
 
-    
+
 
     verificaCodigo(guid: string = "", tipo: string = ""){
         return new Promise((resolve, reject) => {
+            debugger;
             this.afDataBase.list(`/AcessosMobile/`, {
               query: {
                 orderByChild: 'codigo',

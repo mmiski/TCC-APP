@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { AngularFireDatabase } from "angularFire2/database";
 import { Cliente } from '../classes/Cliente';
 import * as firebase from 'firebase/app';
-import { AuthService } from './auth.service';
 
 @Injectable()
 export class ClienteService {

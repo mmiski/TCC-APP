@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
 import { SQLite, SQLiteObject } from '@ionic-native/sqlite';
 
@@ -40,6 +39,7 @@ export class PagesProvidersDatabaseProvider {
   public insert(nome: string = "", cpf: string = "", tipousuario: string = "", codigo: string = "") {
     return this.getDB()
       .then((db: SQLiteObject) => {
+        debugger;
         db.executeSql(`select count(id) as qtd from acessosmobile where codigo = ${codigo}`,{}).then((registros: any) =>{
 
       if (registros.rows.item(0).qtd == 0) {
@@ -54,26 +54,29 @@ export class PagesProvidersDatabaseProvider {
   }
 
   public listaAcessosAnteriores(tipo: string = ""){
-    this.getDB()
-    .then((db: SQLiteObject) => {
-      let sql = `SELECT * FROM acessosmobile where tipousuario = ${tipo}`;
+    return new Promise((resolve, reject) => {
 
-      db.executeSql(sql, null)
-        .then((data: any) => {
-          if (data.rows.length > 0) {
+      this.getDB().then((db: SQLiteObject) => {
+        let sql = `SELECT * FROM acessosmobile where tipousuario = ${tipo}`;
+  
+        db.executeSql(sql, null)
+          .then((data: any) => {
             let acessos: any[] = [];
-            for (var i = 0; i < data.rows.length; i++) {
-              var acesso = data.rows.item(i);
-              acessos.push(acesso);
-            }
-            return acessos;
-          } else {
-            return [];
-          }
-        })
-        .catch((e) => console.error(e));
-    })
-    .catch((e) => console.error(e));
+
+             data.rows.forEach(item => {
+              acessos.push(item);
+             });
+
+              resolve(acessos);
+          })
+          .catch((e) => {
+            reject(new Error(e));
+          });
+      })
+      .catch((e) => {
+        reject(new Error(e));
+      });
+    });
   }
 
 }

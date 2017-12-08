@@ -1,7 +1,5 @@
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase, FirebaseListObservable } from "angularFire2/database";
-import * as firebase from 'firebase/app';
-import { AuthService } from './auth.service';
 import { AcessoMobile } from '../classes/AcessoMobile';
 
 @Injectable()
@@ -41,7 +39,6 @@ clienteKey: string = "";
 
   isDuplicado(valor: string = ""){
     return new Promise((resolve, reject) => {
-      let flag = false;
 
       this.afDataBase.list(`/AcessosMobile`, {
         query: {
