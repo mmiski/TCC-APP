@@ -1,6 +1,6 @@
 {
   "name": "TCC-APP",
-  "app_id": "",
+  "app_id": "1594827f",
   "type": "ionic-angular",
   "integrations": {
     "cordova": {}

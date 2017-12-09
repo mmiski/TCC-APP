@@ -1,7 +1,6 @@
-import { Observable } from "rxjs/Observable";
+
 import { AngularFireDatabase } from "angularFire2/database";
 import { Injectable } from '@angular/core';
-import { Provider } from '@angular/core/src/di/provider';
 import { AcessoMobile } from '../classes/AcessoMobile';
 
 @Injectable()

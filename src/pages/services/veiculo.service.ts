@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase, FirebaseListObservable } from 'angularFire2/database';
 import { Veiculo } from '../classes/Veiculo';
-import { Observable } from 'rxjs/Observable';
 
 @Injectable()
 export class VeiculoService {
