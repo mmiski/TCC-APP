@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase, FirebaseListObservable } from 'angularFire2/database';
 import { Veiculo } from '../classes/Veiculo';
-import { Usuario } from '../classes/Usuario';
 import { Observable } from 'rxjs/Observable';
 
 @Injectable()
@@ -42,7 +41,6 @@ export class VeiculoService {
 
   isDuplicado(valor: string = ""){
     return new Promise((resolve, reject) => {
-      let flag = false;
 
       this.afDataBase.list(`/Clientes/${this.key}/Veiculos/`, {
         query: {

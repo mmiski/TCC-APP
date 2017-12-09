@@ -1,0 +1,78 @@
+
+<ion-header>
+
+  <ion-navbar  color="verdinho">
+    <ion-title text-center>Itinerário</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content >
+    <ion-row ion-card>
+        <ion-card-header text-center ion-col col-12 margin>
+            Mapa
+          </ion-card-header>
+          <ion-card-content ion-col col-12>
+              <agm-map [latitude]="-26.225484" [longitude]="-52.6721232" [zoom]="zoom" [streetViewControl]="false">
+                  <agm-marker *ngFor="let item of listaRotaPassageiros" [latitude]="item.latitude" [longitude]="item.longitude">
+                      <agm-info-window>
+                        <div style="margin-bottom: 0px;">
+                          <div >                                     
+                            <label>Ordem: {{item.ordem}}</label>
+                          </div>
+                          <div >
+                              <strong>Nome: {{item.nome}}</strong>
+                          </div>
+                          <div>
+                              <strong>CPF: {{item.cpf}}</strong>
+                          </div>
+                        </div>
+                      </agm-info-window>
+                  </agm-marker>
+              </agm-map>
+          </ion-card-content>
+    </ion-row>
+    <p text-center padding-top>Lista de Passageiros</p>
+    <ion-list inset no-lines text-center>
+      <ion-card *ngFor="let pass of listaPassageiros">
+          <ion-item >
+              <ion-avatar item-start>
+                <img src={{urlImagem}}>
+              </ion-avatar>
+              <h2>{{pass.nome}}</h2>
+              <p><strong>Ordem: </strong>{{pass.ordem}}</p>
+              <p><strong>CPF: </strong>{{pass.cpf}}</p>
+              <p text-wrap><strong>Endereço: </strong>{{pass.endereco}}</p>
+            </ion-item>
+            <ion-row>
+                <ion-col *ngIf="pass.segunda">
+                  <p>Segunda-Feira</p>
+                </ion-col>
+                <ion-col *ngIf="pass.terca">
+                    <p>Terça-Feira</p>
+                </ion-col>
+                <ion-col *ngIf="pass.quarta">
+                    <p>Quarta-Feira</p>
+                </ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-col *ngIf="pass.quinta">
+                  <p>Quinta-Feira</p>
+                </ion-col>
+                <ion-col *ngIf="pass.sexta">
+                    <p>Sexta-Feira</p>
+                </ion-col>
+                <ion-col *ngIf="pass.sabado">
+                    <p>Sábado</p>
+                </ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-col *ngIf="pass.domingo">
+                    <p>Domingo</p>
+                </ion-col>
+            </ion-row>
+      </ion-card>
+        
+      </ion-list>
+</ion-content>

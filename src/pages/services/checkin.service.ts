@@ -1,4 +1,3 @@
-import * as firebase from 'firebase/app';
 import { Observable } from "rxjs/Observable";
 import { AngularFireDatabase } from "angularFire2/database";
 import { Injectable } from '@angular/core';
@@ -37,6 +36,7 @@ export class CheckInService{
                     this.acessoMobile.tipoUsuario = acesso.tipoUsuario;
                     this.acessoMobile.ultimoAcesso = acesso.ultimoAcesso;
                     this.acessoMobile.usuarioKey = acesso.usuarioKey;
+                    this.acessoMobile.tipoUsuario = acesso.tipoUsuario;
 
                     resolve(this.acessoMobile);
                 }

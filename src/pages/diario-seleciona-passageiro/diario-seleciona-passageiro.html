@@ -1,0 +1,28 @@
+<ion-header>
+
+  <ion-navbar color="verdinho">
+    <ion-title text-center>Selecione um Passageiro</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+
+    <ion-list inset no-lines text-center>
+        <button ion-item (click)="diarioHistorico()">
+            <ion-avatar item-start>
+              <img src={{urlImagem}}>
+            </ion-avatar>
+            <h2 text-wrap>Matheus Malinovski</h2> 
+            <p><strong>CPF: </strong>095.990.769-66</p>
+        </button> 
+        <button ion-item (click)="diarioHistorico()">
+            <ion-avatar item-start>
+              <img src={{urlImagem}}>
+            </ion-avatar>
+            <h2 text-wrap>Isadora Belato</h2> 
+            <p><strong>CPF: </strong>165.910.215-23</p>
+        </button> 
+      </ion-list>
+</ion-content>

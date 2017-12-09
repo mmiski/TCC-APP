@@ -42,7 +42,6 @@ export class MotoristaService {
 
   isDuplicado(valor: string = ""){
     return new Promise((resolve, reject) => {
-      let flag = false;
 
       this.afDataBase.list(`/Clientes/${this.key}/Motoristas`, {
         query: {

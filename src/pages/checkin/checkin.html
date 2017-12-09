@@ -6,60 +6,19 @@
 </ion-header>
 
 <ion-content padding-vertical>
-<<<<<<< HEAD
-<ion-card >
-  <ion-card-content >
-   
-      <ion-item>
-          <ion-card-header text-center>
-              Chave de Acesso
-            </ion-card-header>
-          <button ion-button color="secondary" clear item-right (click)="lerQrcode()">
-              <ion-icon ios="ios-camera" md="md-camera"></ion-icon>
-          </button>
-      </ion-item>
-    
-    <ion-input type="text" text-center style="border: 1px solid black" [(ngModel)]="codigo"></ion-input>
-    <ion-item padding>
-        <ion-label>Outras chaves usadas</ion-label>
-        <button ion-item no-lines text-center  (click)="acessar()">
-         {{ultimoCodigo}}
-        </button>
-      </ion-item>
-  </ion-card-content>
-</ion-card>
-<button ion-button full color="verdinho" icon-right (click)="acessar()">Fazer Checkin
-    <ion-icon name="key"></ion-icon>
-</button>
-=======
-        <ion-grid style="height: 100%">
-                <ion-row style="height: 100%;" justify-content-center align-items-center>
-                        <ion-card >
-                                <ion-card-content >
-                                 
-                                    <ion-item>
-                                        <ion-card-header text-center>
-                                            Chave de Acesso
-                                          </ion-card-header>
-                                        <button ion-button color="verdinho" clear item-right (click)="lerQrcode()">
-                                            <ion-icon ios="ios-camera" md="md-camera"></ion-icon>
-                                        </button>
-                                    </ion-item>
-                                  
-                                  <ion-input type="text" text-center style="border: 1px solid black" [(ngModel)]="codigo"></ion-input>
-                                  <ion-item padding>
-                                      <ion-label>Outras chaves usadas</ion-label>
-                                      <ion-select [(ngModel)]="codigo" interface="action-sheet">
-                                        <ion-option  *ngFor="let item of listaAcessos" value="item.codigo">{{item.nome}} -- {{item.cpf}}</ion-option>
-                                      </ion-select>
-                                    </ion-item>
-                                </ion-card-content>
-                              </ion-card>
-                    
-                </ion-row>
-              </ion-grid>
-
->>>>>>> 0ac3b0d816ac7554f3eb43e75961db0070d864fb
+                <ion-card margin>
+                    <ion-card-content >                 
+                        <ion-item>
+                            <ion-card-header text-center>
+                                Chave de Acesso
+                              </ion-card-header>
+                            <button ion-button color="secondary" clear item-right (click)="lerQrcode()">
+                                <ion-icon ios="ios-camera" md="md-camera"></ion-icon>
+                            </button>
+                        </ion-item>                   
+                      <ion-input type="text" text-center style="border: 1px solid black" [(ngModel)]="codigo"></ion-input>                     
+                    </ion-card-content>
+                  </ion-card>
 </ion-content>
 <ion-footer>
         <ion-toolbar text-center color="verdinho">

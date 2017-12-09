@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { ConteudoDocumentoPage } from '../conteudo-documento/conteudo-documento';
+import { ConteudoMensalidadePage } from '../conteudo-mensalidade/conteudo-mensalidade';
 
 /**
  * Generated class for the DocumentosPage page.
@@ -24,4 +26,11 @@ export class DocumentosPage {
     console.log('ionViewDidLoad DocumentosPage');
   }
 
+  conteudoDoc(){
+    this.navCtrl.push(ConteudoDocumentoPage);
+  }
+
+  conteudoMen(){
+    this.navCtrl.push(ConteudoMensalidadePage);
+  }
 }

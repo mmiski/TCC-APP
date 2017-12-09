@@ -32,6 +32,14 @@ import { SQLite } from '@ionic-native/sqlite';
 import { UsuarioService } from '../pages/services/usuario.service';
 import { SelecionaVeiculoPage } from '../pages/seleciona-veiculo/seleciona-veiculo';
 import { NativeStorage } from '@ionic-native/native-storage';
+import { ConteudoDocumentoPage } from '../pages/conteudo-documento/conteudo-documento';
+import { ConteudoMensalidadePage } from '../pages/conteudo-mensalidade/conteudo-mensalidade';
+import { DiarioHistoricoPage } from '../pages/diario-historico/diario-historico';
+import { DiarioSelecionaPassageiroPage } from '../pages/diario-seleciona-passageiro/diario-seleciona-passageiro';
+import { RotaPassageiroPage } from '../pages/rota-passageiro/rota-passageiro';
+import { ItinerarioPage } from '../pages/itinerario/itinerario';
+import { RotaPassageiroService } from '../pages/services/rota-passageiro.service';
+import { ItinerarioMotoristaPage } from '../pages/itinerario-motorista/itinerario-motorista';
 
 
 
@@ -58,7 +66,14 @@ const  config = {
     DocumentosPage,
     RotasPage,
     DiarioPage,
-    SelecionaVeiculoPage
+    SelecionaVeiculoPage,
+    ConteudoDocumentoPage,
+    ConteudoMensalidadePage,
+    DiarioHistoricoPage,
+    DiarioSelecionaPassageiroPage,
+    RotaPassageiroPage,
+    ItinerarioPage,
+    ItinerarioMotoristaPage
   ],
   imports: [
     BrowserModule,
@@ -81,7 +96,14 @@ const  config = {
     DocumentosPage,
     RotasPage,
     DiarioPage,
-    SelecionaVeiculoPage
+    SelecionaVeiculoPage,
+    ConteudoDocumentoPage,
+    ConteudoMensalidadePage,
+    DiarioHistoricoPage,
+    DiarioSelecionaPassageiroPage,
+    RotaPassageiroPage,
+    ItinerarioPage,
+    ItinerarioMotoristaPage
   ],
   providers: [AngularFireDatabase, ClienteService,
      VeiculoService, MotoristaService, PassageiroService, 
@@ -91,6 +113,7 @@ const  config = {
     QRScanner,
     SQLite,
     NativeStorage,
+    RotaPassageiroService,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

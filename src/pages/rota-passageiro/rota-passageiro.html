@@ -1,0 +1,22 @@
+<ion-header>
+    
+      <ion-navbar color="verdinho">
+        <ion-title text-center>Rotas</ion-title>
+      </ion-navbar>
+    
+    </ion-header>
+    
+    
+    <ion-content>
+    
+        <ion-list inset no-lines text-center>
+            <button *ngFor="let item of listaRotas | async" ion-item (click)="itinerario(item)">
+                <ion-avatar item-start>
+                  <img src={{urlImagem}}>
+                </ion-avatar>
+                <h2 text-wrap>{{item.descricao}}</h2> 
+                <p><strong>Horário: </strong>{{item.horaInicio}} ~ {{item.horaTermino}}</p> 
+          </button>
+          </ion-list>
+    </ion-content>
+    

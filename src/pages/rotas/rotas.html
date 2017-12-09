@@ -1,13 +1,61 @@
-
-<ion-header >
-
-  <ion-navbar text-center color="verdinho">
-    <ion-title >Rotas</ion-title>
-  </ion-navbar>
-
-</ion-header>
-
-
-<ion-content padding>
-
-</ion-content>
+<ion-header>
+    
+      <ion-navbar color="verdinho">
+        <ion-title text-center>Rotas</ion-title>
+      </ion-navbar>
+    
+    </ion-header>
+    
+    
+    <ion-content>
+        <ion-list padding *ngIf="(listaRotasIniciadas | async)?.length > 0">
+            <ion-list-header>
+              Rotas Iniciadas
+            </ion-list-header>
+            <ion-card *ngFor="let item of listaRotasIniciadas | async">
+                <ion-item  ion-item>
+                   <ion-avatar item-start>
+                     <img src={{urlImagem}}>
+                   </ion-avatar>
+                   <h2 text-wrap>{{item.descricao}}</h2> 
+                   <p><strong>Horário: </strong>{{item.horaInicio}} ~ {{item.horaTermino}}</p> 
+                </ion-item>
+                <ion-row text-center>
+                    <ion-col>
+                        <button ion-button icon-rigth clear color="primary" small>
+                          <ion-icon name="map"></ion-icon>
+                          <div>Itinerário</div>
+                        </button>
+                      </ion-col>
+                   <ion-col>
+                     <button ion-button icon-rigth clear color="danger" small>
+                       <ion-icon name="play"></ion-icon>
+                       <div>Finalizar</div>
+                     </button>
+                   </ion-col>
+                </ion-row>
+           </ion-card>
+          </ion-list>
+        <ion-list inset no-lines text-center *ngIf="(listaRotasIniciadas | async)?.length == 0">
+          <ion-card *ngFor="let item of listaRotas | async">
+               <ion-item  ion-item>
+                  <ion-avatar item-start>
+                    <img src={{urlImagem}}>
+                  </ion-avatar>
+                  <h2 text-wrap>{{item.descricao}}</h2> 
+                  <p><strong>Horário: </strong>{{item.horaInicio}} ~ {{item.horaTermino}}</p> 
+               </ion-item>
+               <ion-row text-center>
+                  <ion-col>
+                    <button ion-button icon-right clear color="secondary" small (click)="iniciarRota(item)">
+                        <div>Iniciar</div>
+                      <ion-icon name="play"></ion-icon>
+                      
+                    </button>
+                  </ion-col>
+               </ion-row>
+          </ion-card>
+             
+          </ion-list>
+    </ion-content>
+    

@@ -7,6 +7,8 @@ import { Veiculo } from '../classes/Veiculo';
 import { PassageiroService } from './passageiro.service';
 import { MotoristaService } from './motorista.service';
 import { ClienteService } from './cliente.service';
+import { Passageiro } from '../classes/Passageiro';
+import { Motorista } from '../classes/Motorista';
 
 @Injectable()
 export class UsuarioService {
@@ -15,6 +17,8 @@ export class UsuarioService {
   cliente: Cliente;
   acesso: AcessoMobile;
   van: Veiculo;
+  passageiro: Passageiro;
+  motorista: Motorista;
 
 
   constructor(public afDataBase: AngularFireDatabase, public _servicePassageiro: PassageiroService, public _serviceMotorista: MotoristaService,
@@ -23,6 +27,17 @@ export class UsuarioService {
     this.cliente = new Cliente();
     this.acesso = new AcessoMobile();
     this.van = new Veiculo();  
+    this.passageiro = new Passageiro();
+    this.motorista = new Motorista();
+
+  }
+
+  instanciaPassageiro(){
+
+  }
+
+  instanciaMotorista(){
+
 
   }
 
@@ -53,6 +68,9 @@ export class UsuarioService {
 
   instanciaUsuario(){
     return new Promise((resolve, reject) => {
+      debugger;
+      this.usuario.tipoUsuario = this.acesso.tipoUsuario;
+      this.usuario.$key = this.acesso.usuarioKey;
         if (this.acesso.tipoUsuario == 0) {
             this._servicePassageiro.key = this.acesso.clienteKey;
           this._servicePassageiro.getDados(this.acesso.usuarioKey).subscribe(dados => {
@@ -69,6 +87,21 @@ export class UsuarioService {
                 }
                 else if (pass.$key == 'telefone') {
                   this.usuario.telefone = pass.$value; 
+                }
+                else if (pass.$key == 'email') {
+                  this.usuario.email = pass.$value; 
+                } 
+                else if (pass.$key == 'descricaoPosicao') {
+                  this.passageiro.descricaoPosicao = pass.$value; 
+                }
+                else if (pass.$key == 'endereco') {
+                  this.passageiro.endereco = pass.$value; 
+                }
+                else if (pass.$key == 'latitude') {
+                  this.passageiro.latitude = pass.$value; 
+                }
+                else if (pass.$key == 'longitude') {
+                  this.passageiro.longitude = pass.$value; 
                 }
               });
               resolve();
@@ -88,6 +121,15 @@ export class UsuarioService {
                 }
                 else if (pass.$key == 'telefone') {
                   this.usuario.telefone = pass.$value; 
+                }
+                else if (pass.$key == 'dataEmissao') {
+                  this.motorista.dataEmissao = pass.$value; 
+                }
+                else if (pass.$key == 'dataVencimento') {
+                  this.motorista.dataVencimento = pass.$value; 
+                }
+                else if (pass.$key == 'nRegistro') {
+                  this.motorista.nRegistro = pass.$value; 
                 }
               });
               resolve();

@@ -42,7 +42,6 @@ export class PassageiroMensalidadeService {
 
   isDuplicado(dataVencimento: string = "", mensalidadeKey: string = "" ){
     return new Promise((resolve, reject) => {
-      let flag = false;
 
       this.afDataBase.list(`/Clientes/${this.clienteKey}/Passageiros/${this.passageiroKey}/Mensalidades`).subscribe((dados) => {
 

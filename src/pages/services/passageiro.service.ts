@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { AngularFireDatabase, FirebaseListObservable } from 'angularFire2/database';
 import { Passageiro } from '../classes/Passageiro';
 import { Usuario } from '../classes/Usuario';
-import { Posicao } from '../classes/Posicao';
 
 @Injectable()
 export class PassageiroService {
@@ -45,7 +44,6 @@ export class PassageiroService {
 
   isDuplicado(valor: string = ""){
     return new Promise((resolve, reject) => {
-      let flag = false;
 
       this.afDataBase.list(`/Clientes/${this.key}/Passageiros`, {
         query: {

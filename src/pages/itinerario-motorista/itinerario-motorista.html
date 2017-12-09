@@ -1,0 +1,74 @@
+
+<ion-header>
+    
+      <ion-navbar  color="verdinho">
+        <ion-title text-center>Itinerário</ion-title>
+      </ion-navbar>
+    
+    </ion-header>
+    
+    
+    <ion-content >
+        <ion-row ion-card>
+            <ion-card-header text-center ion-col col-12 margin>
+                Mapa
+              </ion-card-header>
+              <ion-card-content ion-col col-12>
+                  <agm-map [latitude]="-26.225484" [longitude]="-52.6721232" [zoom]="zoom" [streetViewControl]="false">
+                      <agm-marker *ngFor="let item of listaRotaPassageiros" [latitude]="item.latitude" [longitude]="item.longitude">
+                          <agm-info-window>
+                            <div style="margin-bottom: 0px;">
+                              <div >                                     
+                                <label>Ordem: {{item.ordem}}</label>
+                              </div>
+                              <div >
+                                  <strong>Nome: {{item.nome}}</strong>
+                              </div>
+                              <div>
+                                  <strong>CPF: {{item.cpf}}</strong>
+                              </div>
+                            </div>
+                          </agm-info-window>
+                      </agm-marker>
+                  </agm-map>
+              </ion-card-content>
+        </ion-row>
+        <ion-item margin no-lines>
+            <ion-icon name="bus" item-left large ></ion-icon>
+            <h2>Van: {{van.modelo}}</h2>
+            <p>Placa: {{van.placa}}</p>
+            <p>Renavam: {{van.renavam}}</p>
+            <p>Qtd. Passageiros: {{van.quantidadePassageiros}}</p>
+          </ion-item>
+
+        <p text-center padding-top>Lista de Passageiros</p>
+        <ion-list inset no-lines text-center>
+          <ion-card *ngFor="let pass of listaPassageiros">
+              <ion-item >
+                  <ion-icon *ngIf="pass.ordem <= 2" name="checkmark-circle" color="light" item-start></ion-icon>
+                  <ion-icon *ngIf="pass.ordem >= 3 && pass.ordem < 5" name="checkmark-circle" color="secondary" item-start></ion-icon>
+                  <ion-icon *ngIf="pass.ordem == 5" name="close-circle" color="danger" item-start></ion-icon>
+                  <h2>{{pass.nome}}</h2>
+                  <p><strong>Ordem: </strong>{{pass.ordem}}</p>
+                  <p><strong>CPF: </strong>{{pass.cpf}}</p>
+                  <p text-wrap><strong>Endereço: </strong>{{pass.endereco}}</p>
+                </ion-item>
+                <ion-row *ngIf="pass.ordem <= 2" text-center>
+                    <ion-col>
+                      <button ion-button icon-left clear color="secondary" small>
+                        <ion-icon name="checkmark-circle"></ion-icon>
+                        <div>Presente!</div>
+                      </button>
+                    </ion-col>
+                    <ion-col>
+                      <button ion-button icon-left clear color="danger" small>
+                        <ion-icon name="close-circle"></ion-icon>
+                        <div>Não Vai!</div>
+                      </button>
+                    </ion-col>
+                  </ion-row>
+          </ion-card>
+            
+          </ion-list>
+    </ion-content>
+    

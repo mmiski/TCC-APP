@@ -8,6 +8,7 @@ import { MotoristaService } from '../services/motorista.service';
 import { LoginPage } from '../login/login';
 import { SelecionaVeiculoPage } from '../seleciona-veiculo/seleciona-veiculo';
 import { UsuarioService } from '../services/usuario.service';
+import { NativeStorage } from '@ionic-native/native-storage';
 
 @IonicPage()
 @Component({
@@ -19,11 +20,15 @@ export class CheckinPage {
   tipoUsuario: string;
   constructor(public navCtrl: NavController, public navParams: NavParams, public loadingCtrl: LoadingController, 
               private _alertCtrl: AlertController, public _serviceCheckin: CheckInService, public qrScanner: QRScanner,
-              public _servicePassageiro: PassageiroService, public _serviceMotorista: MotoristaService, public platform: Platform, public _serviceUsuario: UsuarioService) {
+              public _servicePassageiro: PassageiroService, public _serviceMotorista: MotoristaService, public platform: Platform, 
+              public _serviceUsuario: UsuarioService, private nativeStorage: NativeStorage) {
     this.tipoUsuario = this.navParams.get('tipoUsuario');
 
     if (this.platform.is('cordova')) {
-      
+      this.nativeStorage.getItem('codigo')
+      .then(ultimoCodigo => {
+        this.codigo = ultimoCodigo;
+      });
     }
    
   }
@@ -61,21 +66,18 @@ export class CheckinPage {
         this._serviceUsuario.instanciaCliente();
        
         if (this.platform.is('cordova')) {
-          this.insertBaseDados(acessoDados).then(() => {
-            loader.dismiss();
-            if (this.tipoUsuario == '1') {
-              this.navCtrl.push(SelecionaVeiculoPage);
-            }else{
-            this.navCtrl.setRoot(LoginPage);
-            }
-          }).catch(() => {
-            loader.dismiss();
-          });
+          this.nativeStorage.setItem('codigo', this.codigo)
+          .then(
+            () => console.log('Stored item!'),
+            error => console.error('Error storing item', error)
+          );
         }else{
           if (this.tipoUsuario == '1') {
+            this._serviceUsuario.instanciaMotorista();
             loader.dismiss();
             this.navCtrl.push(SelecionaVeiculoPage);
           }else{
+            this._serviceUsuario.instanciaPassageiro();
             loader.dismiss();
           this.navCtrl.setRoot(LoginPage);
           }
@@ -92,44 +94,6 @@ export class CheckinPage {
           buttons: [{ text: 'Entendi'}]
         }).present();
       });   
-  }
-
-  insertBaseDados(acessoDados: AcessoMobile){
-    return new Promise((resolve, reject) => {
-      let nome: string;
-      let cpf: string;
-
-      if (this.tipoUsuario == '0') {
-        this._servicePassageiro.key = acessoDados.clienteKey;
-  
-        this._servicePassageiro.getDados(acessoDados.usuarioKey).subscribe(pass => {
-          pass.forEach(element => {
-            debugger;
-            if (element.$key == 'nome') {
-              nome = element.$value; 
-            }
-            if (element.$key == 'cpf') {
-              cpf = element.$value; 
-            }
-          });      
-        });
-      } else if (this.tipoUsuario == '1'){
-          this._serviceMotorista.key = acessoDados.clienteKey;
-    
-          this._serviceMotorista.getDados(acessoDados.usuarioKey).subscribe(pass => {
-            pass.forEach(element => {
-              debugger;
-              if (element.$key == 'nome') {
-                nome = element.$value; 
-              }
-              if (element.$key == 'cpf') {
-                cpf = element.$value; 
-              }
-            });      
-          });       
-      }
-            
-    });
   }
 
 }

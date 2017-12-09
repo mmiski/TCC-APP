@@ -27,12 +27,8 @@
     "@ionic-native/sqlite": "^4.4.2",
     "@ionic-native/status-bar": "4.3.2",
     "@ionic/storage": "2.0.1",
-<<<<<<< HEAD
     "angularfire2": "^5.0.0-rc.4",
     "cordova-plugin-nativestorage": "^2.2.2",
-=======
-    "angularfire2": "^4.0.0-rc.2",
->>>>>>> 0ac3b0d816ac7554f3eb43e75961db0070d864fb
     "cordova-plugin-qrscanner": "^2.5.0",
     "cordova-plugin-x-toast": "^2.6.0",
     "cordova-sqlite-storage": "^2.1.2",

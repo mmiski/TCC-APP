@@ -8,6 +8,64 @@
 </ion-header>
 
 
-<ion-content padding>
+<ion-content>
+    <ion-list padding *ngIf="usuario.tipoUsuario == 0">
+        <ion-list-header>
+          Pendentes
+        </ion-list-header>
+        <ion-card>
+            
+              <ion-item>
+                <h2>Rota: Para MaterDei</h2>
+                <p>Horário: 18:40 ~ 19:40</p>
+                <p>Terça-Feira</p>  
+                <p>Data: 14/11/2017</p>                 
+                <p><strong>Van:</strong> Sprinter <strong>Placa:</strong> AOE-2331</p>   
+              </ion-item>
+              <ion-row text-center>
+                <ion-col>
+                  <button ion-button icon-left clear color="secondary" small>
+                    <ion-icon name="checkmark-circle"></ion-icon>
+                    <div>Eu Vou!</div>
+                  </button>
+                </ion-col>
+                <ion-col>
+                  <button ion-button icon-left clear color="danger" small>
+                    <ion-icon name="close-circle"></ion-icon>
+                    <div>Não Vou!</div>
+                  </button>
+                </ion-col>
+              </ion-row>
+            
+            </ion-card>
+      </ion-list>
+      <ion-item-group>
+          <ion-item-divider color="verdinho">Histórico de outras Rotas</ion-item-divider>
 
+          <ion-card>
+            <ion-card-content>
+                <button ion-button full color="verdinho" outline icon-right (click)="diarioBordo()"> Ver Histórico
+                    <ion-icon name="eye"></ion-icon>
+                </button>
+            <ion-item>                   
+              <ion-icon name="filing" item-start></ion-icon>
+              <h2 text-wrap>Rota: Volta MaterDei</h2>
+              <p>Horário: 21:50 ~ 22:30</p>       
+            </ion-item>
+            </ion-card-content>
+          </ion-card>
+          <ion-card>
+              <ion-card-content>
+                  <button ion-button full color="verdinho" outline icon-right (click)="diarioBordo()"> Ver Histórico
+                      <ion-icon name="eye"></ion-icon>
+                  </button>
+              <ion-item>                   
+                <ion-icon name="filing" item-start></ion-icon>
+                <h2 text-wrap>Rota: Para MaterDei</h2>
+                <p>Horário: 18:40 ~ 19:40</p>             
+              </ion-item>
+              </ion-card-content>
+            </ion-card>
+
+          </ion-item-group>
 </ion-content>

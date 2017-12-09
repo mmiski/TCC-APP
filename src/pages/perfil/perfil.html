@@ -9,23 +9,57 @@
 
 
 <ion-content padding>
-    <ion-card>
-        
-            <ion-item>
-                <ion-avatar item-left *ngIf="url">
-                  <img [src]="url">
+        <ion-card>
+            
+              <ion-item>
+                <ion-avatar item-start>
+                  <img src={{urlImagem}}>
                 </ion-avatar>
-                {{ usuario.nome }}
-            </ion-item>
-            <ion-item>
-              <p>{{ usuario.cpf }}</p>
-            </ion-item>
-            <ion-item>
-              <p>{{ usuario.dataNascimento }}</p>
-            </ion-item>
-            <ion-item>
-              <p>{{ usuario.telefone }}</p>
-            </ion-item>
-          </ion-card>
+                <h2 text-wrap text-center>{{perfil.nome}}</h2>     
+              </ion-item>
+            
+              <ion-card-content>
+                  <p><strong>Nascimento:</strong> {{perfil.dataNascimento}}</p>
+                  <p><strong>CPF: </strong>{{perfil.cpf}}</p>
+                  <p><strong>Telefone: </strong>{{perfil.telefone}}</p>
+                  <p *ngIf="this.perfil.tipoUsuario == 0"><strong>Email:</strong> {{perfil.email}}</p>
+              </ion-card-content>
+    
+            
+            </ion-card>
+    <ion-card *ngIf="this.perfil.tipoUsuario == 1">
+        <ion-card-header text-center>
+            Dados CNH
+          </ion-card-header>
+          <ion-card-content>
+              <p><strong>Emissão:</strong> {{motorista.dataEmissao}}</p>
+              <p><strong>Vencimento: </strong>{{motorista.dataVencimento}}</p>
+              <p><strong>Nº Registro: </strong>{{motorista.nRegistro}}</p>           
+          </ion-card-content>
+    </ion-card>
+    <ion-item *ngIf="this.perfil.tipoUsuario == 1" no-lines>
+        <ion-icon name="bus" item-left large ></ion-icon>
+        <h2>Van: {{van.modelo}}</h2>
+        <p>Placa: {{van.placa}}</p>
+        <p>Renavam: {{van.renavam}}</p>
+        <p>Qtd. Passageiros: {{van.quantidadePassageiros}}</p>
+      </ion-item>
+      <ion-grid *ngIf="this.perfil.tipoUsuario == 0">
+        <ion-row ion-card>
+            <ion-card-header text-center ion-col col-12>
+                Localização
+              </ion-card-header>
+              <ion-card-content ion-col col-12>
+                  <p>{{passageiro.endereco}}</p>
+                  <agm-map [latitude]="passageiro.latitude" [longitude]="passageiro.longitude" [zoom]="18" [streetViewControl]="false">
+                      <agm-marker [latitude]="passageiro.latitude" [longitude]="passageiro.longitude">
+                          <agm-info-window>
+                            <strong>{{passageiro.descricaoPosicao}}</strong>
+                          </agm-info-window>
+                      </agm-marker>
+                  </agm-map>
+              </ion-card-content>
+        </ion-row>
+      </ion-grid>
       
 </ion-content>

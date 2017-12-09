@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { AngularFireDatabase, FirebaseListObservable } from 'angularFire2/database';
 import { Rota } from '../classes/Rota';
 import { Usuario } from '../classes/Usuario';
-import { Posicao } from '../classes/Posicao';
 
 @Injectable()
 export class RotaService {
@@ -28,6 +27,15 @@ export class RotaService {
       })
   }
   
+  listaIniciadas(): FirebaseListObservable<any>{
+    return this.afDataBase.list(`/Clientes/${this.key}/Rotas`,{
+      query: {
+      orderByChild: 'iniciada',
+      equalTo: 'true'
+      }
+      })
+  }
+
   alterar(key: string, rota: Rota){
         return this.lista().update(key, rota);
   }
@@ -42,7 +50,6 @@ export class RotaService {
 
   isDuplicado(valor: string = ""){
     return new Promise((resolve, reject) => {
-      let flag = false;
 
       this.afDataBase.list(`/Clientes/${this.key}/Rotas`).subscribe((dados) => {
         dados.forEach(element => {
