@@ -31,7 +31,7 @@ export class RotaService {
     return this.afDataBase.list(`/Clientes/${this.key}/Rotas`,{
       query: {
       orderByChild: 'iniciada',
-      equalTo: 'true'
+      equalTo:true
       }
       })
   }
