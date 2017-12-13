@@ -22,7 +22,8 @@ export class RotaService {
   lista(): FirebaseListObservable<any>{
     return this.afDataBase.list(`/Clientes/${this.key}/Rotas`,{
       query: {
-      orderByChild: 'nome'
+      orderByChild: 'motoristaKeyTemp',
+      equalTo: ""
       }
       })
   }

@@ -20,7 +20,7 @@
 <ion-content >
     <div [ngSwitch]="first">
         <ion-list *ngSwitchCase="'documentos'">
-            <ion-item-group>
+            <ion-item-group *ngIf="(listaContratosPendentes)?.length > 0">
                 <ion-item-divider color="danger">Não Assinados</ion-item-divider>
 
                 <ion-card *ngFor="let item of listaContratosPendentes">
@@ -42,7 +42,7 @@
                 </ion-card>
 
                 </ion-item-group>
-                <ion-item-group>
+                <ion-item-group *ngIf="(listaContratosAssinados)?.length > 0">
                     <ion-item-divider color="verdinho">Assinados</ion-item-divider>
                     <ion-card *ngFor="let item of listaContratosAssinados">
                         <ion-card-content>
@@ -67,7 +67,7 @@
         <ion-list *ngSwitchCase="'mensalidades'">
 
 
-            <ion-item-group>
+            <ion-item-group *ngIf="(listaMensalidadesPen)?.length > 0">
                 <ion-item-divider color="danger">Mensalidades em Aberto</ion-item-divider>
 
                 <ion-card *ngFor="let item of listaMensalidadesPen">
@@ -85,7 +85,7 @@
                 </ion-card>
 
                 </ion-item-group>
-                <ion-item-group>
+                <ion-item-group *ngIf="(listaMensalidadesOk)?.length > 0">
                     <ion-item-divider color="verdinho">Todas as Mensalidades Pagas</ion-item-divider>
                     <ion-card *ngFor="let item of listaMensalidadesOk">
                         <ion-card-content>
