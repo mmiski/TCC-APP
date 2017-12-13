@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, LoadingController, AlertController, Platform } from 'ionic-angular';
-import { AcessoMobile } from '../classes/AcessoMobile';
 import { CheckInService } from '../services/checkin.service';
 import { QRScanner, QRScannerStatus } from '@ionic-native/qr-scanner';
 import { PassageiroService } from '../services/passageiro.service';
@@ -9,6 +8,7 @@ import { LoginPage } from '../login/login';
 import { SelecionaVeiculoPage } from '../seleciona-veiculo/seleciona-veiculo';
 import { UsuarioService } from '../services/usuario.service';
 import { NativeStorage } from '@ionic-native/native-storage';
+import { AcessoMobileApp } from '../classes/AcessoMobileApp';
 
 @IonicPage()
 @Component({
@@ -60,7 +60,7 @@ export class CheckinPage {
     });
     loader.present();
 
-    this._serviceCheckin.verificaCodigo(this.codigo, this.tipoUsuario).then((acessoDados: AcessoMobile) => {
+    this._serviceCheckin.verificaCodigo(this.codigo, this.tipoUsuario).then((acessoDados: AcessoMobileApp) => {
   
         this._serviceUsuario.acesso = acessoDados;
         this._serviceUsuario.instanciaCliente();
@@ -68,10 +68,22 @@ export class CheckinPage {
         if (this.platform.is('cordova')) {
           this.nativeStorage.setItem('codigo', this.codigo)
           .then(
-            () => console.log('Stored item!'),
+            () => {
+              this._serviceUsuario.atualizaAcesso();
+              if (this.tipoUsuario == '1') {
+                this._serviceUsuario.instanciaMotorista();
+                loader.dismiss();
+                this.navCtrl.push(SelecionaVeiculoPage);
+              }else{
+                this._serviceUsuario.instanciaPassageiro();
+                loader.dismiss();
+              this.navCtrl.setRoot(LoginPage);
+              }
+            },
             error => console.error('Error storing item', error)
           );
         }else{
+          this._serviceUsuario.atualizaAcesso();
           if (this.tipoUsuario == '1') {
             this._serviceUsuario.instanciaMotorista();
             loader.dismiss();

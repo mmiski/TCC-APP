@@ -40,8 +40,7 @@ import { RotaPassageiroPage } from '../pages/rota-passageiro/rota-passageiro';
 import { ItinerarioPage } from '../pages/itinerario/itinerario';
 import { RotaPassageiroService } from '../pages/services/rota-passageiro.service';
 import { ItinerarioMotoristaPage } from '../pages/itinerario-motorista/itinerario-motorista';
-import { ModeloContratoService } from '../pages/services/modelo-contrato.service';
-import { PlanoMensalidadeService } from '../pages/services/plano-mensalidade.service';
+import { Device } from '@ionic-native/device';
 
 
 
@@ -116,8 +115,7 @@ const  config = {
     SQLite,
     NativeStorage,
     RotaPassageiroService,
-    ModeloContratoService,
-    PlanoMensalidadeService,
+    Device,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })
