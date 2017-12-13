@@ -40,6 +40,8 @@ import { RotaPassageiroPage } from '../pages/rota-passageiro/rota-passageiro';
 import { ItinerarioPage } from '../pages/itinerario/itinerario';
 import { RotaPassageiroService } from '../pages/services/rota-passageiro.service';
 import { ItinerarioMotoristaPage } from '../pages/itinerario-motorista/itinerario-motorista';
+import { ModeloContratoService } from '../pages/services/modelo-contrato.service';
+import { PlanoMensalidadeService } from '../pages/services/plano-mensalidade.service';
 
 
 
@@ -114,6 +116,8 @@ const  config = {
     SQLite,
     NativeStorage,
     RotaPassageiroService,
+    ModeloContratoService,
+    PlanoMensalidadeService,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

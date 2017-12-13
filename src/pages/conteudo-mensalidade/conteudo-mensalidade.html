@@ -13,11 +13,11 @@
             <ion-card-content>
                 <ion-item text-wrap>
                     <ion-icon name="cash" item-start></ion-icon>
-                    <h2>Cartela de Mensalidades - 2018</h2>                                        
+                    <h2>{{mensalidade.titulo}}</h2>                                        
                 </ion-item>
-                <p><strong>Dia máximo para pagamento: 10</strong></p>  
-                <p><strong>Valor mensal:</strong> R$ 120,00</p>
-                <p><strong>Vencimento da Cartela:</strong> 31/12/2018</p>
+                <p><strong>Dia máximo para pagamento: {{mensalidade.diaMaxPagamento}}</strong></p>  
+                <p><strong>Valor mensal:</strong> R$ {{mensalidade.valor}}</p>
+                <p><strong>Vencimento da Cartela:</strong> {{mensalidade.dataVencimento}}</p>
             </ion-card-content>
           </ion-card>
           <ion-card>     
@@ -27,51 +27,51 @@
                 <ion-card-content>
                   <ion-item>
                      <ion-label> Janeiro</ion-label>
-                  <ion-toggle color="danger" checked="true"></ion-toggle>
+                  <ion-toggle color="danger" [(ngModel)]="mensalidade.janeiro" (ionChange)="marcar()"></ion-toggle>
                   </ion-item>
                   <ion-item>
                   <ion-label> Fevereiro</ion-label>
-                      <ion-toggle color="danger" checked="true"></ion-toggle>
+                      <ion-toggle color="danger" [(ngModel)]="mensalidade.fevereiro" (ionChange)="marcar()"></ion-toggle>
                   </ion-item>
                   <ion-item>
                      <ion-label> Março</ion-label>
-                  <ion-toggle color="danger" checked="true"></ion-toggle>
+                  <ion-toggle color="danger" [(ngModel)]="mensalidade.marco" (ionChange)="marcar()"></ion-toggle>
                   </ion-item>
                   <ion-item>
                   <ion-label> Abril</ion-label>
-                     <ion-toggle color="danger" checked="true"></ion-toggle>
+                     <ion-toggle color="danger" [(ngModel)]="mensalidade.abril" (ionChange)="marcar()"></ion-toggle>
                   </ion-item>
                   <ion-item>
                   <ion-label> Maio</ion-label>
-                     <ion-toggle color="danger" checked="true"></ion-toggle>
+                     <ion-toggle color="danger" [(ngModel)]="mensalidade.maio" (ionChange)="marcar()"></ion-toggle>
                   </ion-item>
                   <ion-item >
                   <ion-label> Junho</ion-label>
-                    <ion-toggle color="danger" checked="true"></ion-toggle>
+                    <ion-toggle color="danger" [(ngModel)]="mensalidade.junho" (ionChange)="marcar()"></ion-toggle>
                   </ion-item>
                   <ion-item >
                   <ion-label> Julho</ion-label>
-                      <ion-toggle color="danger" checked="true"></ion-toggle>
+                      <ion-toggle color="danger" [(ngModel)]="mensalidade.julho" (ionChange)="marcar()"></ion-toggle>
                   </ion-item>
                   <ion-item >
                   <ion-label> Agosto</ion-label>
-                     <ion-toggle color="danger" checked="true"></ion-toggle>
+                     <ion-toggle color="danger" [(ngModel)]="mensalidade.agosto" (ionChange)="marcar()"></ion-toggle>
                   </ion-item>
                   <ion-item>
                   <ion-label> Setembro</ion-label>
-                      <ion-toggle color="danger" checked="true"></ion-toggle>
+                      <ion-toggle color="danger" [(ngModel)]="mensalidade.setembro" (ionChange)="marcar()"></ion-toggle>
                   </ion-item>
                   <ion-item >
                   <ion-label> Outubro</ion-label>
-                      <ion-toggle color="danger" checked="true"></ion-toggle>
+                      <ion-toggle color="danger" [(ngModel)]="mensalidade.outubro" (ionChange)="marcar()"></ion-toggle>
                   </ion-item>
                   <ion-item >
                   <ion-label> Novembro</ion-label>
-                     <ion-toggle color="danger" checked="false"></ion-toggle>
+                     <ion-toggle color="danger" [(ngModel)]="mensalidade.novembro" (ionChange)="marcar()"></ion-toggle>
                   </ion-item>
                   <ion-item >
                   <ion-label> Dezembro</ion-label>
-                     <ion-toggle color="danger" checked="false"></ion-toggle>
+                     <ion-toggle color="danger" [(ngModel)]="mensalidade.dezembro" (ionChange)="marcar()"></ion-toggle>
                   </ion-item>
                 </ion-card-content>
               
@@ -81,9 +81,7 @@
                 Dados
               </ion-card-header>
               <ion-card-content>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec lorem est, pellentesque nec nisi sed, condimentum ultricies lacus. Donec sit amet lacus ut purus faucibus dictum. Fusce pellentesque congue aliquam. Suspendisse ac orci a eros lobortis maximus nec ac ex. In fermentum cursus felis vel luctus. Morbi non imperdiet ipsum. Sed porttitor pulvinar elit a dapibus.
-                    
-                    Sed interdum felis at lacus aliquam, eu convallis ex sollicitudin. In lectus quam, porta at nisl et, blandit faucibus ipsum. Proin convallis aliquet pellentesque. Vestibulum dapibus arcu eget lectus semper elementum. Phasellus tristique urna vel porta facilisis. Nunc magna sem, cursus non ex quis, bibendum porttitor erat. Vestibulum eu felis suscipit, porttitor erat sit amet, auctor ante. Sed lobortis magna quis ex rutrum mattis. Ut urna nulla, posuere eleifend eleifend sit amet, laoreet nec metus. Cras et purus vehicula, placerat erat et, euismod urna. Phasellus placerat, augue eu pharetra fermentum, ipsum dui finibus quam, id tincidunt lorem libero nec tellus.</p>
+                <p>{{mensalidade.dados}}</p>
               </ion-card-content>
             
             </ion-card>

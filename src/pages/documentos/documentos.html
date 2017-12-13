@@ -23,20 +23,20 @@
             <ion-item-group>
                 <ion-item-divider color="danger">Não Assinados</ion-item-divider>
 
-                <ion-card>
+                <ion-card *ngFor="let item of listaContratosPendentes">
                   <ion-card-content>
                       <button ion-button full color="verdinho" outline icon-right (click)="conteudoDoc()"> Ver Conteúdo
                           <ion-icon name="eye"></ion-icon>
                       </button>
                   <ion-item>                   
                     <ion-icon name="document" item-start></ion-icon>
-                    <h2 text-wrap>Documento Padrão - 2018</h2>
-                    <p>Vencimento: 31/12/2018</p>
+                    <h2 text-wrap>{{item.titulo}}</h2>
+                    <p>Vencimento: {{item.dataVencimento}}</p>
                     
                   </ion-item>
                   <ion-item text-center>
-                    <ion-label> Assinar</ion-label>
-                    <ion-toggle color="danger" checked="false"></ion-toggle>
+                    <ion-label>Assinar</ion-label>
+                    <ion-toggle color="danger" id={{item.$key}} [(ngModel)]="item.assinado" (ionChange)="assinar(item.assinado, item.$key)"></ion-toggle>
                   </ion-item>
                   </ion-card-content>
                 </ion-card>
@@ -44,23 +44,23 @@
                 </ion-item-group>
                 <ion-item-group>
                     <ion-item-divider color="verdinho">Assinados</ion-item-divider>
-                    <ion-card>
+                    <ion-card *ngFor="let item of listaContratosAssinados">
                         <ion-card-content>
-                            <button ion-button full color="verdinho" outline icon-right> Ver Conteúdo
+                            <button ion-button full color="verdinho" outline icon-right (click)="conteudoDoc(item.contratoKey)"> Ver Conteúdo
                                 <ion-icon name="eye"></ion-icon>
                             </button>
                         <ion-item>                   
                           <ion-icon name="document" item-start></ion-icon>
-                          <h2 text-wrap>Documento Padrão - 2017</h2>
-                          <p>Vencimento: 31/12/2017</p>
+                          <h2 text-wrap>{{item.titulo}}</h2>
+                          <p>Vencimento: {{item.dataVencimento}}</p>
                           
                         </ion-item>
                         <ion-item text-center>
-                          <ion-label> Assinar</ion-label>
-                          <ion-toggle color="danger" disabled checked="true"></ion-toggle>
+                          <ion-label>Assinar</ion-label>
+                          <ion-toggle color="danger" disabled id={{item.$key}} [(ngModel)]="item.assinado" (ionChange)="assinar(item.assinado, item.$key)"></ion-toggle>
                         </ion-item>
                         </ion-card-content>
-                    </ion-card>
+                      </ion-card>
                 </ion-item-group>
         </ion-list>
     
@@ -70,34 +70,34 @@
             <ion-item-group>
                 <ion-item-divider color="danger">Mensalidades em Aberto</ion-item-divider>
 
-                <ion-card>
+                <ion-card *ngFor="let item of listaMensalidadesPen">
                   <ion-card-content>
-                      <button ion-button full color="verdinho" outline icon-right (click)="conteudoMen()"> Ver Mensalidades
+                      <button ion-button full color="verdinho" outline icon-right (click)="conteudoMen(item.mensalidadeKey, item.$key)"> Ver Mensalidades
                           <ion-icon name="eye"></ion-icon>
                       </button>
                       <ion-item text-wrap>
                           <ion-icon name="cash" item-start></ion-icon>
-                          <h2>Cartela de Mensalidades - 2018</h2>
-                          <p>Dia máximo para pagamento: 10</p>                        
+                          <h2>{{item.titulo}}</h2>
+                          <p>Dia máximo para pagamento: {{item.diaMaxPagamento}}</p>                        
                       </ion-item>
-                      <p text-center>Valor mensal: R$ 120,00</p>
+                      <p text-center>Valor mensal: R$ {{item.valor}}</p>
                   </ion-card-content>
                 </ion-card>
 
                 </ion-item-group>
                 <ion-item-group>
                     <ion-item-divider color="verdinho">Todas as Mensalidades Pagas</ion-item-divider>
-                    <ion-card>
+                    <ion-card *ngFor="let item of listaMensalidadesOk">
                         <ion-card-content>
-                            <button ion-button full color="verdinho" outline icon-right (click)="conteudoMen()"> Ver Mensalidades
+                            <button ion-button full color="verdinho" outline icon-right (click)="conteudoMen(item.mensalidadeKey, item.$key)"> Ver Mensalidades
                                 <ion-icon name="eye"></ion-icon>
                             </button>
                             <ion-item text-wrap>
                                 <ion-icon name="cash" item-start></ion-icon>
-                                <h2>Cartela de Mensalidades - 2017</h2>
-                                <p>Dia máximo para pagamento: 10</p>                        
+                                <h2>{{item.titulo}}</h2>
+                                <p>Dia máximo para pagamento: {{item.diaMaxPagamento}}</p>                        
                             </ion-item>
-                            <p text-center>Valor mensal: R$ 120,00</p>
+                            <p text-center>Valor mensal: R$ {{item.valor}}</p>
                         </ion-card-content>
                       </ion-card>
                 </ion-item-group>

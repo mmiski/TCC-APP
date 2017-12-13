@@ -1,12 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { ModeloContrato } from '../classes/ModeloContrato';
+import { ModeloContratoService } from '../services/modelo-contrato.service';
 
-/**
- * Generated class for the ConteudoDocumentoPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 
 @IonicPage()
 @Component({
@@ -14,12 +10,19 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'conteudo-documento.html',
 })
 export class ConteudoDocumentoPage {
+documento: ModeloContrato;
+key: string;
+  constructor(public navCtrl: NavController, public navParams: NavParams, public _serviceModeloContrato: ModeloContratoService) {
+    this.documento = new ModeloContrato();
+    this.key = this.navParams.get('contratoKey');
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+
+    this._serviceModeloContrato.getDados(this.key).subscribe(dados => {
+      this.documento.titulo = dados[1].$value;
+      this.documento.dados = dados[0].$value;
+    });
+
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad ConteudoDocumentoPage');
-  }
 
 }

@@ -26,26 +26,14 @@ export class PassageiroContratoService {
     return this.afDataBase.list(`/Clientes/${this.clienteKey}/Passageiros/${this.passageiroKey}/Contratos/${key}`);
   }
 
-  novo(passageiroContrato: PassageiroContrato){
-    return this.lista().push(passageiroContrato);
-  }
-
-  alterar(key: string, passageiroContrato: PassageiroContrato){
-    
-       return this.lista().update(key, passageiroContrato);
-  }
-
   assinar(assinado: boolean = false, key: string = ""){
     return this.lista().update(key, {assinado: assinado});
   }
 
-  deleta(key: string){
-    debugger;
-    return this.lista().remove(key);
-  }
 
   isDuplicado(dataVencimento: string = "", contratoKey: string = "" ){
     return new Promise((resolve, reject) => {
+      let flag = false;
 
       this.afDataBase.list(`/Clientes/${this.clienteKey}/Passageiros/${this.passageiroKey}/Contratos`).subscribe((dados) => {
 
