@@ -4,6 +4,8 @@ import { DiarioHistoricoPage } from '../diario-historico/diario-historico';
 import { UsuarioApp } from '../classes/UsuarioApp';
 import { UsuarioService } from '../services/usuario.service';
 import { DiarioSelecionaPassageiroPage } from '../diario-seleciona-passageiro/diario-seleciona-passageiro';
+import { FirebaseListObservable } from 'angularFire2/database';
+import { RotaService } from '../services/rota.service';
 
 /**
  * Generated class for the DiarioPage page.
@@ -20,17 +22,15 @@ import { DiarioSelecionaPassageiroPage } from '../diario-seleciona-passageiro/di
 export class DiarioPage {
 
   usuario: UsuarioApp;
+  listaRotas: FirebaseListObservable<any>;
   
-    constructor(public navCtrl: NavController, public navParams: NavParams, public _serviceUsuario: UsuarioService) {
+    constructor(public navCtrl: NavController, public navParams: NavParams, public _serviceRota: RotaService, public _serviceUsuario: UsuarioService) {
       this.usuario = this._serviceUsuario.usuario;
+      this.listaRotas = this._serviceRota.lista();
     }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad DiarioPage');
-  }
-
-  diarioBordo(){
-    this.navCtrl.push(this.usuario.tipoUsuario == 0 ? DiarioHistoricoPage : DiarioSelecionaPassageiroPage);
+  diarioBordo(rotaKey: string = ""){
+    this.navCtrl.push(this.usuario.tipoUsuario == 0 ? DiarioHistoricoPage : DiarioSelecionaPassageiroPage, {rotaKey: rotaKey} );
   }
 
 }

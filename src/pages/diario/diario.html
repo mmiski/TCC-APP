@@ -42,30 +42,17 @@
       <ion-item-group>
           <ion-item-divider color="verdinho">Histórico de outras Rotas</ion-item-divider>
 
-          <ion-card>
+          <ion-card *ngFor="let item of listaRotas | async">
             <ion-card-content>
-                <button ion-button full color="verdinho" outline icon-right (click)="diarioBordo()"> Ver Histórico
+                <button ion-button full color="verdinho" outline icon-right (click)="diarioBordo(item.$key)"> Ver Histórico
                     <ion-icon name="eye"></ion-icon>
                 </button>
             <ion-item>                   
               <ion-icon name="filing" item-start></ion-icon>
-              <h2 text-wrap>Rota: Volta MaterDei</h2>
-              <p>Horário: 21:50 ~ 22:30</p>       
+              <h2 text-wrap>{{item.descricao}}</h2>
+              <p>Horário: {{item.horaInicio}} ~ {{item.horaTermino}}</p>       
             </ion-item>
             </ion-card-content>
           </ion-card>
-          <ion-card>
-              <ion-card-content>
-                  <button ion-button full color="verdinho" outline icon-right (click)="diarioBordo()"> Ver Histórico
-                      <ion-icon name="eye"></ion-icon>
-                  </button>
-              <ion-item>                   
-                <ion-icon name="filing" item-start></ion-icon>
-                <h2 text-wrap>Rota: Para MaterDei</h2>
-                <p>Horário: 18:40 ~ 19:40</p>             
-              </ion-item>
-              </ion-card-content>
-            </ion-card>
-
           </ion-item-group>
 </ion-content>

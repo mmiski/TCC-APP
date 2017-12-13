@@ -1,15 +1,15 @@
 
 import { AngularFireDatabase } from "angularFire2/database";
 import { Injectable } from '@angular/core';
-import { AcessoMobile } from '../classes/AcessoMobile';
+import { AcessoMobileApp } from '../classes/AcessoMobileApp';
 
 @Injectable()
 export class CheckInService{
 
-    acessoMobile: AcessoMobile;
+    acessoMobile: AcessoMobileApp;
 
     constructor(public afDataBase: AngularFireDatabase){
-        this.acessoMobile = new AcessoMobile();
+        this.acessoMobile = new AcessoMobileApp();
     }
 
 
@@ -36,6 +36,7 @@ export class CheckInService{
                     this.acessoMobile.ultimoAcesso = acesso.ultimoAcesso;
                     this.acessoMobile.usuarioKey = acesso.usuarioKey;
                     this.acessoMobile.tipoUsuario = acesso.tipoUsuario;
+                    this.acessoMobile.$key = acesso.$key;
 
                     resolve(this.acessoMobile);
                 }

@@ -9,23 +9,26 @@ import { MotoristaService } from './motorista.service';
 import { ClienteService } from './cliente.service';
 import { Passageiro } from '../classes/Passageiro';
 import { Motorista } from '../classes/Motorista';
+import { AcessoMobileService } from './acesso-mobile.service';
+import { Device } from '@ionic-native/device';
+import { AcessoMobileApp } from '../classes/AcessoMobileApp';
 
 @Injectable()
 export class UsuarioService {
 
   usuario: UsuarioApp;
   cliente: Cliente;
-  acesso: AcessoMobile;
+  acesso: AcessoMobileApp;
   van: Veiculo;
   passageiro: Passageiro;
   motorista: Motorista;
 
 
   constructor(public afDataBase: AngularFireDatabase, public _servicePassageiro: PassageiroService, public _serviceMotorista: MotoristaService,
-              public _serviceCliente: ClienteService) { 
+              public _serviceCliente: ClienteService, public _serviceAcesso: AcessoMobileService,private device: Device) { 
     this.usuario = new UsuarioApp();
     this.cliente = new Cliente();
-    this.acesso = new AcessoMobile();
+    this.acesso = new AcessoMobileApp();
     this.van = new Veiculo();  
     this.passageiro = new Passageiro();
     this.motorista = new Motorista();
@@ -138,6 +141,23 @@ export class UsuarioService {
 
     });
      
+  }
+
+  atualizaAcesso(){
+    debugger;
+    this._serviceAcesso.clienteKey = this.acesso.clienteKey;
+
+    let an = new AcessoMobile();
+    an.clienteKey = this.acesso.clienteKey;
+    an.codigo = this.acesso.codigo;
+    an.tipoUsuario = this.acesso.tipoUsuario;
+    an.usuarioKey = this.acesso.usuarioKey;
+    let dateNow : Date = new Date();
+
+    an.ultimoAcesso = `${dateNow.getDate()}/${dateNow.getMonth()}/${dateNow.getFullYear()} ${dateNow.getHours()}:${dateNow.getMinutes()}:${dateNow.getSeconds()}`;
+    an.dispositivoUltimoAcesso = this.device.model;
+
+    this._serviceAcesso.lista().update(this.acesso.$key, an);
   }
 
 }
